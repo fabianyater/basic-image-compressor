@@ -1,0 +1,21 @@
+.uploadInput {
+  display: none; /* Oculta el input real */
+}
+
+.labelUpload {
+  border: none; /* Elimina el borde punteado */
+  padding: 20px 40px;
+  border-radius: 10px; /* Bordes redondeados como en la imagen */
+  text-align: center;
+  background-color: #007bff; /* Fondo azul del botón */
+  color: white; /* Texto en color blanco */
+  cursor: pointer;
+  font-size: 16px; /* Tamaño de fuente apropiado */
+  font-family: Arial, sans-serif; /* Tipo de letra, opcional */
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+.labelUpload:hover {
+  background-color: #0056b3; /* Color de fondo más oscuro al pasar el ratón por encima */
+}
