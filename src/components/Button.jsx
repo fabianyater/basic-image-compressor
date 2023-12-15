@@ -2,7 +2,6 @@ import React from "react";
 import styles from "./Button.module.css";
 import SvgIcon from "./SvgIcon";
 
-import "ldrs/lineSpinner";
 import Spinner from "./Spinner";
 
 function Button({ text, onClick, title, isLoading, icon, disabled }) {
