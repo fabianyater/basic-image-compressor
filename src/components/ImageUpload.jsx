@@ -2,8 +2,7 @@ import imageCompression from "browser-image-compression";
 import { saveAs } from "file-saver";
 import JSZip from "jszip";
 import React, { useEffect, useState } from "react";
-import Button from "./Button";
-import FloatingButton from "./FloatingButton";
+import FloatingWrapper from "./FloatingWrapper";
 import styles from "./ImageUpload.module.css";
 import Input from "./Input";
 import SvgIcon from "./SvgIcon";
@@ -14,6 +13,14 @@ function ImageUpload() {
   const [length, setLength] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const [disableButton, setDisableButton] = useState(true);
+
+  const handleNameChange = (index, newName) => {
+    setImageInfo((currentImages) =>
+      currentImages.map((img, i) =>
+        i === index ? { ...img, newName: newName } : img
+      )
+    );
+  };
 
   const handleImageUpload = async (event) => {
     const files = Array.from(event.target.files);
@@ -53,7 +60,10 @@ function ImageUpload() {
       await Promise.all(
         imageInfo.map((image) =>
           imageCompression(image.file, options).then((compressedFile) => {
-            zip.file(compressedFile.name, compressedFile);
+            const fileName = image.newName
+              ? `${image.newName}.jpg`
+              : compressedFile.name;
+            zip.file(fileName, compressedFile);
           })
         )
       );
@@ -128,44 +138,27 @@ function ImageUpload() {
               />
             </div>
             <div className={styles.info}>
-              <span>{info.file.name}</span>
+              <span
+                contentEditable
+                onBlur={(e) =>
+                  handleNameChange(index, e.target.textContent.trim())
+                }
+              >
+                {info.file.name}
+              </span>
             </div>
           </div>
         ))}
       </div>
 
-      <div className={styles.options} data-empty={length === 0}>
-        {length > 0 && (
-          <FloatingButton>
-            <Input
-              hideText
-              icon={"plus"}
-              rounded
-              onChange={handleImageUpload}
-            />
-            <Tooltip title={"Agregar"} />
-          </FloatingButton>
-        )}
-
-        <FloatingButton>
-          <Button
-            icon={"delete"}
-            onClick={clearArray}
-            disabled={disableButton}
-          />
-          <Tooltip title={"Limpiar"} />
-        </FloatingButton>
-
-        <FloatingButton>
-          <Button
-            icon={"compress"}
-            onClick={compressAndDownloadImages}
-            disabled={disableButton}
-            isLoading={isLoading}
-          />
-          <Tooltip title={"Comprimir"} />
-        </FloatingButton>
-      </div>
+      <FloatingWrapper
+        clearArray={clearArray}
+        isLoading={isLoading}
+        handleImageUpload={handleImageUpload}
+        compressAndDownloadImages={compressAndDownloadImages}
+        disableButton={disableButton}
+        length={length}
+      />
     </>
   );
 }

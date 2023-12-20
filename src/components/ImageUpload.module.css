@@ -135,21 +135,3 @@
 .imageWrapper span {
   margin-top: 10px;
 }
-
-.options {
-  box-sizing: border-box;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  flex-direction: column;
-  height: 100vh;
-  gap: 20px;
-  padding: 20px;
-  position: fixed;
-  right: 0;
-  top: 0;
-}
-
-.options > *:last-child {
-  margin-top: auto; /* Empuja el último botón hacia el fondo */
-}
