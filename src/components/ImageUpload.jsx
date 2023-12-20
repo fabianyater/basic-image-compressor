@@ -152,7 +152,6 @@ function ImageUpload() {
             icon={"delete"}
             onClick={clearArray}
             disabled={disableButton}
-            isLoading={isLoading}
           />
           <Tooltip title={"Limpiar"} />
         </FloatingButton>
