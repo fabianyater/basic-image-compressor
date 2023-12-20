@@ -9,6 +9,7 @@
   background-color: #007bff;
   color: white;
   cursor: pointer;
+  transition: all ease-in-out 0.3s;
 
   & svg {
     color: #fff;
@@ -18,7 +19,8 @@
     background-color: #0056b3;
   }
 
-  &:disabled{
+  &:disabled {
     background-color: gray;
+    transition: all ease-in-out 0.3s;
   }
 }

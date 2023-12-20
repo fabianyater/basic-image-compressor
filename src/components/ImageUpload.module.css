@@ -1,18 +1,24 @@
 .container {
   box-sizing: border-box;
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  justify-content: center;
   padding: 20px;
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   max-width: 1400px;
   width: 90%;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 60px;
+}
+
+.container[data-empty="true"] {
+  flex-direction: column;
+  align-items: center;
 }
 
 .title {
-  font-size: 24px;
-  color: #ecf0f1;
+  font-size: 32px;
+  color: #000f;
 }
 
 .uploadInput {
@@ -24,151 +30,126 @@
   cursor: pointer;
 }
 
-.imagesContainer {
-  box-sizing: border-box;
-  margin: 20px 0;
-  height: 100vh;
-  width: 100%;
-  border-radius: 10px;
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 20px;
-  /* background-color: #1c2b3a; */
-  padding: 20px;
-  overflow-y: scroll;
-
-}
-
 .imageWrapper {
+  /* flex: 1; */
   display: flex;
   align-items: center;
   justify-content: space-between;
   flex-direction: column;
   box-sizing: border-box;
   width: 198px;
-  height: 240px;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #fdfdfd;
+  height: 244px;
+  /* overflow: hidden; */
+  background: #fdfdfd;
+  border: 1px solid rgba(0, 0, 0, 0);
   border-radius: 5px;
+  position: relative;
+  gap: 5px;
+  padding: 5px;
+  box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.08);
+  transition: border ease-out 0.3s;
+
+  .actions {
+    box-sizing: border-box;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-end;
+    width: 100%;
+    gap: 5px;
+
+    & button {
+      padding: 0;
+      border: none;
+      border-radius: 50%;
+      background: #ebebf4;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.6);
+      visibility: hidden;
+
+      &:hover {
+        background-color: #4d90fe;
+
+        & svg {
+          & path {
+            stroke: #fff;
+          }
+        }
+      }
+    }
+  }
+
+  .canvas {
+    width: 90%;
+    height: 70%;
+
+    .image {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+  }
+
+  .info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    text-align: center;
+
+    & span {
+      display: block;
+      width: 100%;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      font-size: 12px;
+      margin: 0;
+    }
+  }
+
+  &:hover {
+    border: 1px solid #9999a2;
+    transition: border ease-out 0.3s;
+
+    .actions {
+      & button {
+        visibility: visible;
+      }
+    }
+  }
 }
 
+.imageWrapper:hover > div > span {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* .imageWrapper[data-max="true"] {
+  flex: none;
+  height: 240px;
+}
+ */
 .imageWrapper span {
   margin-top: 10px;
 }
 
-.image {
-  max-width: 90%;
-  max-height: 70%;
-  object-fit: contain;
-}
-
-.buttonContainer {
+.options {
+  box-sizing: border-box;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   flex-direction: column;
-  gap: 10px;
-  position: absolute;
-  bottom: 20px;
-  right: 20px;
-
-  .tooltipContainer {
-    position: relative;
-    display: inline-block;
-
-    .tooltipText {
-      visibility: hidden;
-      opacity: 0;
-      width: 120px;
-      background-color: black;
-      color: #fff;
-      text-align: center;
-      border-radius: 6px;
-      padding: 5px 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0;
-
-      position: absolute;
-      z-index: 1;
-      left: 0;
-      top: 50%;
-      transform: translate(-100%, -50%);
-      padding: 10px;
-      margin-left: -10px;
-      transition: all 0.2s ease-in-out;
-
-      &::after {
-        content: "";
-        position: absolute;
-        top: 50%;
-        left: 100%;
-        margin-top: -5px;
-        border-width: 5px;
-        border-style: solid;
-        border-color: transparent transparent transparent #000;
-      }
-    }
-  }
+  height: 100vh;
+  gap: 20px;
+  padding: 20px;
+  position: fixed;
+  right: 0;
+  top: 0;
 }
 
-.buttonClean {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  gap: 10px;
-  position: absolute;
-  top: 50px;
-  right: 20px;
-
-  .tooltipContainer {
-    position: relative;
-    display: inline-block;
-
-    .tooltipText {
-      visibility: hidden;
-      opacity: 0;
-      width: 120px;
-      background-color: black;
-      color: #fff;
-      text-align: center;
-      border-radius: 6px;
-      padding: 5px 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0;
-
-      position: absolute;
-      z-index: 1;
-      left: 0;
-      top: 50%;
-      transform: translate(-100%, -50%);
-      padding: 10px;
-      margin-left: -10px;
-      transition: all 0.2s ease-in-out;
-
-      &::after {
-        content: "";
-        position: absolute;
-        top: 50%;
-        left: 100%;
-        margin-top: -5px;
-        border-width: 5px;
-        border-style: solid;
-        border-color: transparent transparent transparent #000;
-      }
-    }
-  }
-}
-
-.tooltipContainer:hover .tooltipText {
-  visibility: visible;
-  opacity: 1;
+.options > *:last-child {
+  margin-top: auto; /* Empuja el último botón hacia el fondo */
 }

@@ -1,0 +1,13 @@
+.buttonContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.buttonContainer:hover > div > span {
+
+  visibility: visible;
+  opacity: 1;
+}
