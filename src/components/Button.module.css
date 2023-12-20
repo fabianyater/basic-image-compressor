@@ -9,6 +9,7 @@
   background-color: #007bff;
   color: white;
   cursor: pointer;
+  position: relative;
   transition: all ease-in-out 0.3s;
 
   & svg {
